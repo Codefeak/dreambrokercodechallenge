@@ -19,9 +19,8 @@ app.post('/', (req, res) => {
   textLength.withoutSpaces = withoutSpaces.length;
   response.textLength = textLength;
 
-  const textArr = text.split(' ').filter(item => item !== '');
+  const textArr = textLow.split(' ').filter(item => item !== '');
   response.wordCount = textArr.length;
-
   const charArr = textLow
     .split('')
     .filter(item => item !== ' ' && item !== '2' && item !== ',' && item !== '.')
@@ -42,15 +41,6 @@ app.post('/', (req, res) => {
 
 function countChar(char, array) {
   return array.filter(item => item === char).length;
-}
-function sortArray(keyA, keyB){
-  let c = 0;
-  if(keyA>keyB){
-    c=1;
-  }else if (keyA<keyB){
-    c=-1;
-  }
-  return c;
 }
 
 app.listen(port, () => {
