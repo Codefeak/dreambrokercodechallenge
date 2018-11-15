@@ -18,13 +18,13 @@ app.post('/', (req, res) => {
   textLength.withoutSpaces = withoutSpaces.length;
   response.textLength = textLength;
 
-  const textArr = text.split(' ').filter(item => item !== '');
+  const textArr = text.toLowerCase().split(' ').filter(item => item !== '');
   response.wordCount = textArr.length;
 
   const charArr = text
     .split('')
     .filter(item => item !== ' ' && item !== '2' && item !== ',' && item !== '.')
-    .toLowerCase();
+    .sort();
 
   for (let i = 0, tmp = {}; i < charArr.length; i++) {
     tmp[charArr[i]] = countChar(charArr[i], charArr);
