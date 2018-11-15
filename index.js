@@ -24,7 +24,7 @@ app.post('/', (req, res) => {
   const charArr = text
     .split('')
     .filter(item => item !== ' ' && item !== '2' && item !== ',' && item !== '.')
-    .sort();
+    .toLowerCase();
 
   for (let i = 0, tmp = {}; i < charArr.length; i++) {
     tmp[charArr[i]] = countChar(charArr[i], charArr);
