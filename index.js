@@ -12,7 +12,6 @@ app.post('/', (req, res) => {
   const { text } = req.body;
   const textLength = {},
     characterCount = [],
-    tmp = {},
     response = {};
 
   textLength.withSpaces = text.length;
@@ -26,15 +25,19 @@ app.post('/', (req, res) => {
 
   const charArr = text
     .split('')
-    .filter(item => item !== ' ' && item !== '2')
+    .filter(item => item !== ' ' && item !== '2' && item !== ',' && item !== '.')
     .sort();
 
-  for (let i = 0; i < charArr.length; i++) {
+  for (let i = 0, tmp = {}; i < charArr.length; i++) {
     tmp[charArr[i]] = countChar(charArr[i], charArr);
+    characterCount.length>0
+    ? !characterCount.some(item => Object.keys(item).includes(charArr[i]))
+      && characterCount.push(tmp)
+    : characterCount.push(tmp);
+    tmp = {};
   }
   
-  characterCount.push(tmp);
-  response.characterCount = characterCount;
+  response.characterCount = characterCount.sort();
   // console.log('response:', response);
   res.json(response);
 });
