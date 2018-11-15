@@ -35,7 +35,7 @@ app.post('/', (req, res) => {
   
   characterCount.push(tmp);
   response.characterCount = characterCount;
-  console.log('response:', response);
+  // console.log('response:', response);
   res.json(response);
 });
 
