@@ -8,20 +8,21 @@ app.use(express.urlencoded({ extended: false }));
 
 app.post('/', (req, res) => {
   const { text } = req.body;
+  textLow = text.toLowerCase();
   const textLength = {},
     characterCount = [],
     response = {};
 
-  textLength.withSpaces = text.length;
-  const withoutSpaces = text.split('').filter(item => item !== ' ');
+  textLength.withSpaces = textLow.length;
+  const withoutSpaces = textLow.split('').filter(item => item !== ' ');
 
   textLength.withoutSpaces = withoutSpaces.length;
   response.textLength = textLength;
 
-  const textArr = text.toLowerCase().split(' ').filter(item => item !== '');
+  const textArr = text.split(' ').filter(item => item !== '');
   response.wordCount = textArr.length;
 
-  const charArr = text
+  const charArr = textLow
     .split('')
     .filter(item => item !== ' ' && item !== '2' && item !== ',' && item !== '.')
     .sort();
@@ -35,12 +36,21 @@ app.post('/', (req, res) => {
     tmp = {};
   }
   
-  response.characterCount = characterCount.sort();
+  response.characterCount = characterCount;
   res.json(response);
 });
 
 function countChar(char, array) {
   return array.filter(item => item === char).length;
+}
+function sortArray(keyA, keyB){
+  let c = 0;
+  if(keyA>keyB){
+    c=1;
+  }else if (keyA<keyB){
+    c=-1;
+  }
+  return c;
 }
 
 app.listen(port, () => {
