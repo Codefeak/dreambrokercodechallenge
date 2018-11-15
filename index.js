@@ -1,12 +1,10 @@
 const express = require('express');
-// const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(cors());
 
 app.post('/', (req, res) => {
   const { text } = req.body;
@@ -38,7 +36,6 @@ app.post('/', (req, res) => {
   }
   
   response.characterCount = characterCount.sort();
-  // console.log('response:', response);
   res.json(response);
 });
 
